@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><title>luongphim – bảng điều khiển</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+body{font-family:"DejaVu Sans",system-ui,sans-serif;background:#0f1117;color:#e8e8ee;margin:0;padding:18px}
+h1{margin:0 0 4px;font-size:22px}.sub{color:#9aa;margin-bottom:14px}
+.bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.pill{padding:6px 12px;border-radius:20px;background:#1d2130;font-weight:600}
+.queued{color:#aab}.running{color:#5ab0ff}.done{color:#4cd68a}.failed{color:#ff6b6b}
+button,a.btn{background:#3b5bfd;color:#fff;border:0;border-radius:8px;padding:8px 14px;font-weight:600;cursor:pointer;text-decoration:none;font-size:14px}
+button.small{padding:4px 10px;font-size:12px;background:#a33}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.card{background:#181b26;border-radius:10px;padding:10px;border:1px solid #262a3a}
+.thumb{width:100%;aspect-ratio:16/9;background:#232738;border-radius:6px;object-fit:contain;display:flex;align-items:center;justify-content:center;color:#667;font-size:12px}
+.prog{height:8px;background:#262a3a;border-radius:4px;overflow:hidden;margin:8px 0 4px}.prog>div{height:100%;background:#5ab0ff;transition:width .4s}
+.card.done .prog>div{background:#4cd68a}.card.failed .prog>div{background:#ff6b6b}
+.meta{font-size:12px;color:#9aa;display:flex;justify-content:space-between}
+.prompt{font-size:13px;margin:6px 0;height:34px;overflow:hidden}.err{font-size:11px;color:#ff9a9a;margin-top:4px}
+</style></head><body>
+<h1>🎬 luongphim — tạo video AI song song</h1>
+<div class="sub">Theo dõi tiến độ từng job theo thời gian thực</div>
+<div class="bar">
+ <span class="pill queued" id="s-queued">Đang chờ: 0</span>
+ <span class="pill running" id="s-running">Đang chạy: 0</span>
+ <span class="pill done" id="s-done">Xong: 0</span>
+ <span class="pill failed" id="s-failed">Lỗi: 0</span>
+ <button onclick="retryFailed()">↻ Thử lại tất cả job lỗi</button>
+ <a class="btn" href="/download.zip" id="zip">⬇ Tải tất cả video (.zip)</a>
+</div>
+<div class="grid" id="grid"></div>
+<script>
+const LBL={queued:"Đang chờ",running:"Đang chạy",done:"Hoàn thành",failed:"Lỗi"};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+async function retry(id){await fetch('/api/retry/'+id,{method:'POST'});tick()}
+async function retryFailed(){await fetch('/api/retry-failed',{method:'POST'});tick()}
+async function tick(){
+ const r=await fetch('/api/jobs');const d=await r.json();
+ for(const k in LBL)document.getElementById('s-'+k).textContent=LBL[k]+": "+d.stats[k];
+ document.getElementById('grid').innerHTML=d.jobs.map(j=>`
+ <div class="card ${j.status}">
+  ${j.thumb?`<img class="thumb" src="/files/${j.thumb.split('/').pop()}">`:`<div class="thumb">${j.status==='failed'?'✖ thất bại':'đang tạo…'}</div>`}
+  <div class="meta"><b>${esc(j.id)}</b><span class="${j.status}">${LBL[j.status]}</span></div>
+  <div class="prompt">${esc(j.prompt)}</div>
+  <div class="prog"><div style="width:${j.progress.toFixed(0)}%"></div></div>
+  <div class="meta"><span>${esc(j.effective_provider||j.provider)}${j.character?' · 👤 '+esc(j.character):''}</span><span>${j.progress.toFixed(0)}% · lần ${j.attempts}</span></div>
+  ${j.error&&j.status!=='done'?`<div class="err">${esc(j.error)}</div>`:''}
+  ${j.status==='failed'?`<button class="small" onclick="retry('${j.id}')">↻ Thử lại</button>`:''}
+  ${j.output&&j.status==='done'?`<a class="meta" style="color:#8bf" href="/files/${j.output.split('/').pop()}" target="_blank">▶ Xem video</a>`:''}
+ </div>`).join('');
+}
+tick();setInterval(tick,700);
+</script></body></html>

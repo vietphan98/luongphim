@@ -1,0 +1,191 @@
+{
+ "settings": {
+  "concurrency": 8,
+  "max_retries": 2,
+  "characters": "characters.json"
+ },
+ "jobs": [
+  {
+   "name": "clip01",
+   "prompt": "Mèo Mun chạy trên mái nhà lúc hoàng hôn",
+   "provider": "replicate",
+   "duration": 3,
+   "aspect": "16:9",
+   "character": "meo_mun"
+  },
+  {
+   "name": "clip02",
+   "prompt": "Robot Bí pha cà phê sữa đá",
+   "provider": "fal",
+   "duration": 3,
+   "aspect": "9:16",
+   "character": "robot_bi"
+  },
+  {
+   "name": "clip03",
+   "prompt": "Phố cổ Hội An về đêm, đèn lồng lung linh",
+   "provider": "runway",
+   "duration": 3,
+   "aspect": "1:1",
+   "character": "robot_bi"
+  },
+  {
+   "name": "clip04",
+   "prompt": "Sóng biển Nha Trang quay chậm",
+   "provider": "luma",
+   "duration": 3,
+   "aspect": "16:9"
+  },
+  {
+   "name": "clip05",
+   "prompt": "Mèo Mun đội nón lá đi chợ Tết",
+   "provider": "veo",
+   "duration": 3,
+   "aspect": "9:16",
+   "character": "meo_mun"
+  },
+  {
+   "name": "clip06",
+   "prompt": "Robot Bí nhảy trên sân thượng Sài Gòn",
+   "provider": "mock",
+   "duration": 3,
+   "aspect": "1:1",
+   "character": "robot_bi"
+  },
+  {
+   "name": "clip07",
+   "prompt": "Ruộng bậc thang Mù Cang Chải mùa lúa chín",
+   "provider": "replicate",
+   "duration": 3,
+   "aspect": "16:9"
+  },
+  {
+   "name": "clip08",
+   "prompt": "Xe máy chạy qua cầu Rồng Đà Nẵng",
+   "provider": "fal",
+   "duration": 3,
+   "aspect": "9:16"
+  },
+  {
+   "name": "clip09",
+   "prompt": "Mèo Mun chạy trên mái nhà lúc hoàng hôn",
+   "provider": "runway",
+   "duration": 3,
+   "aspect": "1:1",
+   "character": "meo_mun"
+  },
+  {
+   "name": "clip10",
+   "prompt": "Robot Bí pha cà phê sữa đá",
+   "provider": "luma",
+   "duration": 3,
+   "aspect": "16:9",
+   "character": "robot_bi"
+  },
+  {
+   "name": "clip11",
+   "prompt": "Phố cổ Hội An về đêm, đèn lồng lung linh",
+   "provider": "veo",
+   "duration": 3,
+   "aspect": "9:16"
+  },
+  {
+   "name": "clip12",
+   "prompt": "Sóng biển Nha Trang quay chậm",
+   "provider": "mock",
+   "duration": 3,
+   "aspect": "1:1"
+  },
+  {
+   "name": "clip13",
+   "prompt": "Mèo Mun đội nón lá đi chợ Tết",
+   "provider": "replicate",
+   "duration": 3,
+   "aspect": "16:9",
+   "character": "meo_mun"
+  },
+  {
+   "name": "clip14",
+   "prompt": "Robot Bí nhảy trên sân thượng Sài Gòn",
+   "provider": "fal",
+   "duration": 3,
+   "aspect": "9:16",
+   "character": "robot_bi"
+  },
+  {
+   "name": "clip15",
+   "prompt": "Ruộng bậc thang Mù Cang Chải mùa lúa chín",
+   "provider": "runway",
+   "duration": 3,
+   "aspect": "1:1",
+   "character": "robot_bi"
+  },
+  {
+   "name": "clip16",
+   "prompt": "Xe máy chạy qua cầu Rồng Đà Nẵng",
+   "provider": "luma",
+   "duration": 3,
+   "aspect": "16:9"
+  },
+  {
+   "name": "clip17",
+   "prompt": "Mèo Mun chạy trên mái nhà lúc hoàng hôn",
+   "provider": "veo",
+   "duration": 3,
+   "aspect": "9:16",
+   "character": "meo_mun"
+  },
+  {
+   "name": "clip18",
+   "prompt": "Robot Bí pha cà phê sữa đá",
+   "provider": "mock",
+   "duration": 3,
+   "aspect": "1:1",
+   "character": "robot_bi"
+  },
+  {
+   "name": "clip19",
+   "prompt": "Phố cổ Hội An về đêm, đèn lồng lung linh",
+   "provider": "replicate",
+   "duration": 3,
+   "aspect": "16:9"
+  },
+  {
+   "name": "clip20",
+   "prompt": "Sóng biển Nha Trang quay chậm",
+   "provider": "fal",
+   "duration": 3,
+   "aspect": "9:16"
+  },
+  {
+   "name": "clip21",
+   "prompt": "Mèo Mun đội nón lá đi chợ Tết",
+   "provider": "runway",
+   "duration": 3,
+   "aspect": "1:1",
+   "character": "meo_mun"
+  },
+  {
+   "name": "clip22",
+   "prompt": "Robot Bí nhảy trên sân thượng Sài Gòn",
+   "provider": "luma",
+   "duration": 3,
+   "aspect": "16:9",
+   "character": "robot_bi"
+  },
+  {
+   "name": "clip23",
+   "prompt": "Ruộng bậc thang Mù Cang Chải mùa lúa chín",
+   "provider": "veo",
+   "duration": 3,
+   "aspect": "9:16"
+  },
+  {
+   "name": "clip24",
+   "prompt": "Xe máy chạy qua cầu Rồng Đà Nẵng",
+   "provider": "mock",
+   "duration": 3,
+   "aspect": "1:1"
+  }
+ ]
+}

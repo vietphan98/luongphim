@@ -1,0 +1,23 @@
+settings:
+  concurrency: 4
+  max_retries: 3
+  characters: characters.json
+  providers:
+    replicate: {max_concurrency: 2, model: minimax/video-01}
+    veo: {max_concurrency: 1}
+defaults:
+  duration: 5
+  aspect: "9:16"
+jobs:
+  - name: meo-mo-dau
+    prompt: "Mèo Mun nhảy qua vũng nước, phong cách hoạt hình"
+    provider: replicate
+    character: meo_mun
+  - name: robot
+    prompt: "Robot Bí vẫy tay chào khán giả"
+    provider: runway
+    character: robot_bi
+  - name: canh-pho
+    prompt: "Phố đi bộ Nguyễn Huệ về đêm, góc máy flycam"
+    provider: veo
+    repeat: 3
