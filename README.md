@@ -13,7 +13,7 @@
 - **Retry có backoff** (luỹ thừa + jitter, có giới hạn trên) khi gặp rate limit (HTTP 429, tôn trọng `Retry-After`), lỗi mạng hoặc lỗi 5xx. Lỗi không nên thử lại (4xx, nội dung bị từ chối…) thì dừng ngay.
 - **Thư viện nhân vật**: tên → một hoặc nhiều ảnh tham chiếu. Job có `character` sẽ gửi ảnh tham chiếu cho provider hỗ trợ image-to-video.
 - **Dashboard**: trạng thái từng job (đang chờ / đang chạy / hoàn thành / lỗi), thanh %, ảnh thumbnail, nút thử lại từng job hoặc tất cả job lỗi, nút tải zip toàn bộ video đã xong.
-- **Provider mock** tự động được dùng khi không có API key: tạo **file MP4 thật** bằng ffmpeg (nền màu, chữ prompt, ảnh nhân vật chuyển động), có độ trễ giả lập, lỗi ngẫu nhiên và thỉnh thoảng giả lập 429 để thấy cơ chế retry.
+- **Provider mock** tự động được dùng khi không có API key: tạo **file MP4 thật** bằng ffmpeg (nền màu, chữ prompt, ảnh nhân vật chuyển động — clip giả lập, không phải video AI), có độ trễ giả lập, lỗi ngẫu nhiên và thỉnh thoảng giả lập 429 để thấy cơ chế retry.
 - Không phụ thuộc thư viện ngoài khi chạy (chỉ dùng thư viện chuẩn Python + ffmpeg).
 
 ## Về tính nhất quán nhân vật (đọc kỹ)
@@ -133,14 +133,15 @@ Test bao phủ: giới hạn đồng thời toàn cục và theo provider, chạ
 
 Ảnh chụp thật từ lần chạy demo: `docs/01-dang-chay.png`, `docs/02-giua-chung.png`, `docs/03-hoan-thanh.png`, `docs/04-thu-lai.png`.
 
-**Hook cho Reel:** *"24 video AI, 1 lệnh, chạy song song — xem nè!"*
+**Hook cho Reel:** *"Chạy 24 job tạo video song song, theo dõi trên 1 dashboard — đây là bản demo giả lập"*
 
-(Video trong demo là clip giả lập do ffmpeg tạo, không phải video AI thật.)
+(Video trong demo là clip giả lập do ffmpeg tạo bằng provider mock, **không phải video AI**. Muốn có video AI thật cần API key của provider và chịu phí theo dịch vụ.)
 
 ## Giấy phép bên thứ ba
 
 - **Python** (thư viện chuẩn) – Python Software Foundation License.
-- **FFmpeg** – công cụ ngoài được gọi qua dòng lệnh, không đóng gói kèm; LGPL 2.1+ (một số bản build là GPL, ví dụ khi có libx264). Bạn tự cài và tuân theo giấy phép của bản build mình dùng.
+- **FFmpeg** – công cụ ngoài được gọi qua dòng lệnh; **luongphim không đóng gói kèm ffmpeg**. FFmpeg là LGPL 2.1+, nhưng bản build có libx264 là GPL.
+- **libx264** (qua ffmpeg) – GPL 2+. Chế độ mock mã hoá MP4 bằng `libx264`, nên bạn cần một bản ffmpeg được build kèm libx264 (các bản trên apt/brew thường đã có). Bạn tự cài và tuân theo giấy phép của bản build mình dùng.
 - **PyYAML** (tuỳ chọn, chỉ khi dùng file YAML) – MIT.
 - **pytest** (chỉ để chạy test) – MIT.
 - **Font DejaVu** (nếu có trên máy, dùng để vẽ chữ trong clip mock; không đóng gói kèm) – giấy phép Bitstream Vera / DejaVu (tự do).

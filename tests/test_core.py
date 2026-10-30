@@ -152,6 +152,11 @@ class BatchTests(unittest.TestCase):
         p, fb = build_providers({"replicate", "veo"})
         self.assertIsInstance(p["replicate"], MockProvider)
         self.assertEqual(sorted(fb), ["replicate", "veo"])
+        from luongphim.providers import ReplicateProvider, VeoProvider
+        self.assertEqual(p["replicate"].max_concurrency, ReplicateProvider.max_concurrency)
+        self.assertEqual(p["veo"].max_concurrency, VeoProvider.max_concurrency)
+        p2, _ = build_providers({"fal"}, force_mock=True, config={"fal": {"max_concurrency": 5}})
+        self.assertEqual(p2["fal"].max_concurrency, 5)
 
 
 @unittest.skipUnless(shutil.which("ffmpeg"), "cần ffmpeg")

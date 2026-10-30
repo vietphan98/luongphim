@@ -21,7 +21,7 @@ def build_providers(names, force_mock=False, config=None, mock_opts=None):
             m = MockProvider(**{**(mock_opts or {}), **config.get("mock", {})})
             if n != "mock":
                 m.name = f"mock({n})"
-                m.max_concurrency = config.get(n, {}).get("max_concurrency", cls.max_concurrency + 1)
+                m.max_concurrency = config.get(n, {}).get("max_concurrency", cls.max_concurrency)
                 fallback.append(n)
             out[n] = m
         else:
